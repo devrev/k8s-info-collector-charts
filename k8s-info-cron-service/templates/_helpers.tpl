@@ -19,3 +19,11 @@
   {{- printf "%s" (include "service.name" . ) }}
 {{- end  -}}
 {{- end }}
+
+{{- define "k8s-info-cron-service.secretName" -}}
+{{-  if .Values.secret.name -}}
+  {{- printf "%s" .Values.secret.name | trunc 63 | trimSuffix "-" }}
+{{- else -}}
+  {{- printf "%s" (include "service.name" . ) }}
+{{- end  -}}
+{{- end }}

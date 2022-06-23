@@ -3,10 +3,13 @@ enabled: true
 
 # Enable or disable the cluster role, helpful for creating role
 clusterRole:
-  enabled: true
-  #cluster role name
-  name: k8s-info-reader
-  namespace: default
+  enabled: false
+
+  #cluster role name defaults to service.name-role
+  name:
+
+  # Defaults to deployment namespace
+  namespace:
 
 # Default chart name is ReleaseName-ChartName, this will override that
 fullnameOverride:
@@ -41,7 +44,7 @@ serviceAccount:
   enabled: false
 
   # Set to the name of the serviceAccount, defaults to service.name
-  name: default
+  name:
 
 # Image of the container to execute
 image:
@@ -64,7 +67,16 @@ annotations: []
 env:
     # ENV_VAR_NAME: "value"
     API_URL: https://api.dev.devrev-eng.ai/hidden/upload-parts-discovery-file/operator
-    AAT: dummy_aat
+    
+secret:
+  # Set create to false to use existing secret 
+  create: true
+
+  # Override default secret name OR specifiy existing secret name
+  name:
+
+  # Required when creating secret
+  applicationToken:
 
 # Resource reservations and limits, particuarlly important for OOM errors
 resources:
@@ -99,7 +111,7 @@ volumes: []
 config:
 
   # Enable or disable config file mounting
-  enabled: true
+  enabled: false
 
   # Path AND FILENAME within the container to mount the config
   # Absolute or relative to the container's working directory

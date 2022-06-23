@@ -2,8 +2,8 @@
 kind: ClusterRole
 apiVersion: rbac.authorization.k8s.io/v1
 metadata:
-  namespace: {{ .Values.clusterRole.namespace }}
-  name: {{ .Values.clusterRole.name }}
+  namespace: {{ .Values.clusterRole.namespace | default .Release.Namespace }}
+  name: {{ include "k8s-info-cron-service.serviceAccountName" . }}
 rules:
   - apiGroups: [""]          # "" indicates the core API group
     resources: ["pods", "services", "ingresses", "ingressclasses"]
