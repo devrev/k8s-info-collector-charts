@@ -1,0 +1,131 @@
+# Enable or disable the entire chart, helpful for quickly testing
+enabled: true
+
+# Enable or disable the cluster role, helpful for creating role
+clusterRole:
+  enabled: false
+
+  #cluster role name defaults to service.name-role
+  name:
+
+  # Defaults to deployment namespace
+  namespace:
+
+# Default chart name is ReleaseName-ChartName, this will override that
+fullnameOverride:
+
+# Execution schedule read more at 
+# https://kubernetes.io/docs/concepts/workloads/controllers/cron-jobs/#cron-schedule-syntax
+cronString: "0 */6 * * *"
+
+# Specifies how to treat concurrent executions of a Job. Valid values are:
+# - "Allow" (default): allows CronJobs to run concurrently;
+# - "Forbid": forbids concurrent runs, skipping next run if previous run hasn't finished yet;
+# - "Replace": cancels currently running job and replaces it with a new one
+concurrencyPolicy: Forbid
+
+# Specifies the number of retries before marking this job failed.
+backoffLimit: 2
+
+# Specifies the duration in seconds relative to the startTime that the job may be continuously
+# active before the system tries to terminate it; value must be positive integer.
+# If a Job is suspended (at creation or through an update), 
+# this timer will effectively be stopped and reset when the Job is resumed again.
+activeDeadlineSeconds: 600
+
+# Restart policy for all containers within the pod. One of Always, OnFailure, Never. 
+# More info: https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#restart-policy
+restartPolicy: Never
+
+# Service account object to bind kubernetes roles / permissions
+serviceAccount:
+
+  # Enabled will create the service account
+  enabled: false
+
+  # Set to the name of the serviceAccount, defaults to service.name
+  name:
+
+# Image of the container to execute
+image:
+
+  # The repo url typicall <image provider url>/<image-name>
+  # ACCEPTS TEMPLATES 
+  #   EXAMPLE: "{{ global.devrev.awsAccountId }}.dkr.ecr.us-east-1.amazonaws.com/{{ include "service.name" .}}"
+  repository: ghcr.io/devrev/k8s-info-collector-charts
+  pullPolicy: Never
+  # Tag of the image to deploy
+  tag: latest
+
+podSecurityContext: {}
+
+securityContext: {}
+
+annotations: []
+
+# Environment variables to bind to the container
+env:
+    # ENV_VAR_NAME: "value"
+    API_URL: https://api.dev.devrev-eng.ai/hidden/upload-parts-discovery-file/operator
+    
+secret:
+  # Set create to false to use existing secret 
+  create: true
+
+  # Override default secret name OR specifiy existing secret name
+  name:
+
+  # Required when creating secret
+  applicationToken:
+
+# Resource reservations and limits, particuarlly important for OOM errors
+resources:
+
+  # Maximum settings before pods are killed
+  limits:
+    cpu: 250m
+    memory: 250Mi
+
+  # Amount of resources to reserve for usual operation. 
+  requests:
+
+    # Recommend 120-150% of idle CPU
+    cpu: 50m
+
+    # Recommend 120-150% of idle memory
+    memory: 50Mi
+
+# Volumes to be mounted to your pod
+volumeMounts: []
+
+# Command to be executed in the container
+command: []
+
+# Args to be sent to the command
+args: []
+
+# Custom volumes, usually used in addition to a volume mount
+volumes: []
+
+# config.content will be attached to your pod(s) at the location specfied by mountPath
+config:
+
+  # Enable or disable config file mounting
+  enabled: false
+
+  # Path AND FILENAME within the container to mount the config
+  # Absolute or relative to the container's working directory
+  #   EXAMPLE absolute
+  #     mountPath: /config/local.yaml
+  #   EXAMPLE relative
+  #     mountPath: prod.yaml
+  mountPath:
+
+  # String contents of the config file.
+  # SHOULD NOT CONTAIN SECRET/SENSITIVE VALUES!
+  #   EXAMPLE
+  #     content: |
+  #       my_conf_yaml: 1
+  #       my_other_config:
+  #         - list-1
+  content:
