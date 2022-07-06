@@ -18,8 +18,8 @@ metadata:
   name: {{ include "k8s-info-cron-service.serviceAccountName" . }}-role
 subjects:
   - kind: ServiceAccount
-    name: default
-    namespace: default
+    name: {{ include "k8s-info-cron-service.serviceAccountName" . }}
+    namespace: {{  .Release.Namespace }}
 roleRef:
   kind: ClusterRole
   name: {{ include "k8s-info-cron-service.serviceAccountName" . }}
