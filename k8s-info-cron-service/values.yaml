@@ -3,7 +3,7 @@ enabled: true
 
 # Enable or disable the cluster role, helpful for creating role
 clusterRole:
-  enabled: false
+  enabled: true
 
   #cluster role name defaults to service.name-role
   name:
@@ -41,7 +41,7 @@ restartPolicy: Never
 serviceAccount:
 
   # Enabled will create the service account
-  enabled: false
+  enabled: true
 
   # Set to the name of the serviceAccount, defaults to service.name
   name:
