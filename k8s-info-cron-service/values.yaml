@@ -53,7 +53,7 @@ image:
   # ACCEPTS TEMPLATES 
   #   EXAMPLE: "{{ global.devrev.awsAccountId }}.dkr.ecr.us-east-1.amazonaws.com/{{ include "service.name" .}}"
   repository: ghcr.io/devrev/k8s-info-collector-charts
-  pullPolicy: Never
+
   # Tag of the image to deploy
   tag: latest
 
