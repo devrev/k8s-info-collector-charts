@@ -4,7 +4,9 @@ Helm chart for enabling cron pod on the kubernetes cluster to upload cluster dat
 The following commands must be executed on the cluster
 
 1. Clone this repository
-   ``` git clone https://github.com/devrev/k8s-info-collector-charts.git ```
+   ``` 
+       git clone https://github.com/devrev/k8s-info-collector-charts.git 
+   ```
 
 2. Log in to the DevRev App using app.devrev.ai and navigate to the connections menu to connect to Kubernetes
 
@@ -16,8 +18,13 @@ The following commands must be executed on the cluster
     ```
 
 4. You can view the cronjob on the cluster using the following command
-    ``` kubectl describe cronjob -n k8s-info-cron-service ```
+    ``` 
+        kubectl describe cronjob -n k8s-info-cron-service 
+    ```
 
-5. The collector cron job by default runs once every 6 hours. This frequency can be tuned by adding the below parameters to the command while
-   installing the collector.
-   ``` helm upgrade --install k8s-info-cron-service ./k8s-info-collector-charts/k8s-info-cron-service  --set secret.applicationToken=$(cat /tmp/aat) --create-namespace --namespace=k8s-info-cron-service --set cronString='*/1 * * * *' ```
+5. The collector cron job by default runs once every 6 hours. This frequency can be tuned by adding the cronString parameters to the command while
+   installing the collector. The below example will make the cronjob run every hour.
+   ``` 
+       helm upgrade --install k8s-info-cron-service ./k8s-info-collector-charts/k8s-info-cron-service  --set secret.applicationToken=$(cat /tmp/aat) 
+       --create-namespace --namespace=k8s-info-cron-service --set cronString='* */1 * * *' 
+   ```
