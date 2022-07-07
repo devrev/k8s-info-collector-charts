@@ -19,7 +19,7 @@ The following commands must be executed on the cluster
 
 4. You can view the cronjob on the cluster using the following command
     ``` 
-        kubectl describe cronjob -n k8s-info-cron-service 
+       kubectl describe cronjob -n k8s-info-cron-service 
     ```
 
 5. The collector cron job by default runs once every 6 hours. This frequency can be tuned by adding the cronString parameters to the command while
@@ -29,3 +29,4 @@ The following commands must be executed on the cluster
        --set secret.applicationToken=$(cat /tmp/aat) --create-namespace --namespace=k8s-info-cron-service 
        --set cronString='* */1 * * *' 
    ```
+6. Learn more about Parts Discovery by visiting https://devrev.ai/docs/product/parts
