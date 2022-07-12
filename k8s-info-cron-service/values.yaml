@@ -66,7 +66,7 @@ annotations: []
 # Environment variables to bind to the container
 env:
     # ENV_VAR_NAME: "value"
-    API_URL: https://api.dev.devrev-eng.ai/hidden/upload-parts-discovery-file/operator
+    API_URL: https://api.devrev.ai/hidden/upload-parts-discovery-file/operator
     
 secret:
   # Set create to false to use existing secret 
