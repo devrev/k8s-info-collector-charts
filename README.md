@@ -20,7 +20,7 @@ The following commands must be executed on the cluster after all prerequisite ar
 
 3. The App will generate the application access token required and surface the command similar as below with the required credentials to execute on your cluster.
    ```  
-   helm upgrade --install  k8s-info-cron-service ./k8s-info-collector-charts/k8s-info-cron-service  
+   helm upgrade --install  k8s-info-cron-service ./k8s-info-collector-charts/k8s-info-cron-service \
    --set secret.applicationToken=$AAT_TOKEN --create-namespace --namespace=k8s-info-cron-service
    ```
 
@@ -32,8 +32,8 @@ The following commands must be executed on the cluster after all prerequisite ar
 5. The collector cron job by default runs once every 6 hours. This frequency can be tuned by adding the cronString parameters to the command while
    installing the collector. The below example will make the cronjob run every hour.
    ``` 
-   helm upgrade --install k8s-info-cron-service ./k8s-info-collector-charts/k8s-info-cron-service  
-   --set secret.applicationToken=$AAT_TOKEN --create-namespace --namespace=k8s-info-cron-service 
-   --set cronString='0 */1 * * *' 
+   helm upgrade --install k8s-info-cron-service ./k8s-info-collector-charts/k8s-info-cron-service \
+   --set secret.applicationToken=$AAT_TOKEN --create-namespace --namespace=k8s-info-cron-service \
+   --set cronString='0 */1 * * *'
    ```
 6. Learn more about Parts Discovery [here](https://devrev.ai/docs/product/parts)
