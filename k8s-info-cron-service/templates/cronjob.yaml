@@ -1,4 +1,4 @@
-{{- if .Values.enabled }}
+{{- if (and .Values.enabled (eq (include "k8s-info-cron-service.k8sVersionCheck" .) "true")) }}
 apiVersion: batch/v1beta1
 kind: CronJob
 metadata:
