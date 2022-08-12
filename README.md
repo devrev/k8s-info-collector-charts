@@ -1,6 +1,11 @@
 # k8s-info-collector-charts
 Helm chart for enabling cron pod on the kubernetes cluster to upload cluster data to DevRev cloud.
 
+## Kubernetes Compatibility
+
+Currently, collector is supported upto Kubernetes Version `1.24.X`.
+If your API server is above that cronjob will not be installed by the helm chart.
+
 ## Prerequisite
 
 1. [Install git](https://git-scm.com/downloads) if not already installed

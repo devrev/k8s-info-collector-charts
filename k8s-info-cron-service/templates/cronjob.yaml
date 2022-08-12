@@ -1,4 +1,6 @@
-{{- if .Values.enabled }}
+{{- if eq (include "k8s-info-cron-service.k8sVersionCheck" .) "false" }}
+  {{- fail "Unsupported kubernetes version" }}
+{{- else  if .Values.enabled }}
 apiVersion: batch/v1beta1
 kind: CronJob
 metadata:
